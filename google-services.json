@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "204023191417",
+    "project_id": "stailish-4fcc3",
+    "storage_bucket": "stailish-4fcc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204023191417:android:cdff808175ba9f5ae401a8",
+        "android_client_info": {
+          "package_name": "com.aro.stailishapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204023191417-7i2aukbocinmiso5kic87ev9d9080usm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4DT4WTIeoz_KLc9c0G-TpQ5gUh0yHZDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204023191417-7i2aukbocinmiso5kic87ev9d9080usm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
