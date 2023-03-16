@@ -1,0 +1,84 @@
+Para que los SDK de Firebase puedan acceder a los valores de configuración de google-services.json, necesitas el complemento Gradle de los servicios de Google.
+
+Agrega el complemento como una dependencia buildscript a tu archivo build.gradle de nivel de proyecto:
+Archivo de Gradle de nivel de raíz (nivel de proyecto) (<project>/build.gradle):
+buildscript {
+
+  repositories {
+
+    // Make sure that you have the following two repositories
+
+    google()  // Google's Maven repository
+
+    mavenCentral()  // Maven Central repository
+
+  }
+
+  dependencies {
+
+    ...
+
+    // Add the dependency for the Google services Gradle plugin
+
+    classpath 'com.google.gms:google-services:4.3.15'
+
+  }
+
+}
+
+
+allprojects {
+
+  ...
+
+  repositories {
+
+    // Make sure that you have the following two repositories
+
+    google()  // Google's Maven repository
+
+    mavenCentral()  // Maven Central repository
+
+  }
+
+}
+
+Luego, en el archivo build.gradle del módulo (nivel de app) agrega los complementos google-services y cualquier SDK de Firebase que quieras usar en tu app:
+Kotlin
+Java
+Archivo de Gradle del módulo (nivel de app) (<project>/<app-module>/build.gradle):
+plugins {
+
+  id 'com.android.application'
+
+  // Add the Google services Gradle plugin
+
+  id 'com.google.gms.google-services'
+
+  ...
+
+}
+
+
+dependencies {
+
+  // Import the Firebase BoM
+
+  implementation platform('com.google.firebase:firebase-bom:31.2.3')
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+
+  // When using the BoM, don't specify versions in Firebase dependencies
+
+  implementation 'com.google.firebase:firebase-analytics'
+
+
+  // Add the dependencies for any other desired Firebase products
+
+  // https://firebase.google.com/docs/android/setup#available-libraries
+
+}
+
+Si usas la BoM de Firebase para Android, tu app siempre utilizará versiones compatibles de la biblioteca de Firebase. Más información
+Después de agregar el complemento y los SDK deseados, sincroniza tu proyecto de Android con archivos de Gradle.
