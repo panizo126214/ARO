@@ -3,6 +3,7 @@ package com.aro.stailishapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import API.ApiInterface;
 import API.ServiceGenerator;
+import Model.Constants;
 import Model.Usuario;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,9 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etEmail = findViewById(R.id.etEmailRegistro);
         EditText etPassword = findViewById(R.id.editTextTextPassword);
 
-
-
+        Button btnLog = findViewById(R.id.btnIniciarSesionRegistro);
         Button btnReg = findViewById(R.id.btnRegistro);
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
             @Override
@@ -47,13 +49,19 @@ public class RegisterActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Te has registrado correctamente!",Toast.LENGTH_LONG);
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        if (response.body() == 1) {
+                            Toast.makeText(getApplicationContext(), "Te has registrado correctamente!",Toast.LENGTH_LONG).show();
+                            SharedPreferences.Editor editor = getSharedPreferences(Constants.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                            editor.putInt(String.valueOf(Constants.KEY_ID), response.body());
+                            editor.apply();
+                            //Mandar los datos del usuario a la siguiente actividad para uso de base de datos
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("idusuario", response.body());
+                            Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
                             startActivity(intent);
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "El usuario o contraseña no son correctos",Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "El usuario o contraseña no son correctos",Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -61,8 +69,18 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onFailure(Call<Integer> call, Throwable t) {
                         //ha fallado mostrar aviso de que es posible de que no tenga intertet
                         Log.e("tag", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "El usuario o contraseña no son correctos",Toast.LENGTH_LONG).show();
                     }
                 });
+            }
+        });
+
+        btnLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

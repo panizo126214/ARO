@@ -94,24 +94,23 @@ public class PromptActivity extends AppCompatActivity {
                         Respuesta resp = response.body();
                         ArrayList<String> link_img = response.body().getOutput();
                         String img = link_img.get(0);
-                        arrayList.add(new Mensaje(prompt,img));
-
-                        MensajeAdapter mensajeAdapter = new MensajeAdapter(getApplicationContext(),R.layout.list_row,arrayList);
+                        arrayList.add(new Mensaje(prompt, img));
+                        MensajeAdapter mensajeAdapter = new MensajeAdapter(getApplicationContext(), R.layout.list_row, arrayList);
                         listView.setAdapter(mensajeAdapter);
                         Call<Integer> call2 = apiInterface.addImg(prompt, finalIdUsuario, img);
+                        Toast.makeText(PromptActivity.this, "Cargando imagen, espere unos segundos...", Toast.LENGTH_LONG).show();
 
+                        //Llamada para guardar la en la base de datos
                         call2.enqueue(new Callback<Integer>() {
                             @Override
                             public void onResponse(Call<Integer> call, Response<Integer> response) {
                                 Log.e("tag", response.message());
-                                Toast.makeText(PromptActivity.this, "Cargando imagen...Espere un poco", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onFailure(Call<Integer> call, Throwable t) {
                                 //ha fallado mostrar aviso de que es posible de que no tenga intertet
                                 Log.e("tag", t.getMessage());
-                                Toast.makeText(PromptActivity.this, "Cargando imagen...Si no carga vuelva a enviar", Toast.LENGTH_LONG).show();
                             }
                         });
                     }

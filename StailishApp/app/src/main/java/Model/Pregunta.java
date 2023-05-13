@@ -7,15 +7,20 @@ import java.util.Random;
 public class Pregunta {
 
     public final ArrayList<String> key_array = new ArrayList<String>(Arrays.asList(
-            "28jHQsD1h0O4Y2GS085LEiyprU60vq4QL3H5pKyEHtMNEcNZtJy7NwaIBwy3",
-            "5vjbXitgCvH2uLUbF5hfePIdO9SheS5q7OGN6N3C6NwVS9BUbtUH8mNYnmqb",
-            "C0Mbe4ha5Qat5ZUA1oTBPDQ3XV3rhCQSSb9FJwyGyRMpvXttgdCD81DTld7z",
-            "jQXiyN5mgKaSb6B0JujTlabHqy5WKqv2d4fs75bfmhu1sQHD1qfwhQoeda9Z",
-            "qCGEI3QRvmqzUT06iJzl1A07yF5PNXqZT7uGueaNhRr1FILvIcrZJNCM5euc"
+            "iE3SXZk1W3m1j1zbMEA0l58IerYJEqCM02o237Wk2XqqMhoWiHF3BbUoJnRs",
+            "QVsfrWhqVDPoWRq61T86JPaszqYFuMPW7XmJiVQTiOXE97EcEebNwjHaSYtN",
+            "o4Ug1IlZf64sBXGbDpJXvXoSy1uMQxJdGF8IIFpY6LBLZMdTIlYiuTqvQagv",
+            "o5ft33svbc4JQ4mwxqUYMpyrMZSFKF7Jyq8UsI51kEJMvknzhMCnkJRf0kau",
+            "QPy6RuvBYyQOBEqC1eql6PK1G7gU8RzFFTrf0UTIDXoYOv3rfvqqJNkisJPK",
+            "x1mwwiXrEaEn8MZj8xjwa3HskF1hvQIOCQhVuml0Vs8hoJmQb7pWRfj5gxnb",
+            "suQMxaG1aVQhp5MakEeU6vlIEg1RQESmtM4jxUAFRl0acZxfv4ozCjlC5iZ4",
+            "ewtMzdXICWjmfHYZGmjhNXIG3toNh2txxcxhWzWmTTghGeFyrDmhs1e2MgdE",
+            "6RXWegWHmrsewxgoygT2UnEqj9jR5VURh7000US9k31dAy7tNvkyJHInn17g",
+            "ymW0kHTTcwn2dNgl0SyQ5kNuckGIGJoQnXQ6lTyct504Wp8uq2VMR6ff2Kyl"
     ));
     public final int min = 0;
     public final int max = key_array.size();
-    public final int random = new Random().nextInt((max - min) + 1) + min;
+    public final int random = new Random().nextInt(max - min);
 
     public String key;
     public String prompt;
@@ -37,7 +42,7 @@ public class Pregunta {
         this.width = "512";
         this.height = "512";
         this.samples = "1";
-        this.num_inference_steps = "20";
+        this.num_inference_steps = "15";
         this.seed = null;
         this.guidance_scale = 7.5;
         this.safety_checker = "yes";

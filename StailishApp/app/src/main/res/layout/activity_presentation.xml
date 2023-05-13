@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3CC9B">
+    android:background="@drawable/gradient_drawable_presentation">
 
     <TextView
         android:id="@+id/bienvenido"
@@ -22,9 +22,10 @@
 
     <ImageButton
         android:id="@+id/flecha"
-        android:layout_width="626dp"
-        android:layout_height="421dp"
+        android:layout_width="679dp"
+        android:layout_height="472dp"
         android:layout_marginTop="-30dp"
+        android:background="#00FFFFFF"
         android:scaleX="0.15"
         android:scaleY="0.15"
         app:layout_constraintBottom_toBottomOf="parent"

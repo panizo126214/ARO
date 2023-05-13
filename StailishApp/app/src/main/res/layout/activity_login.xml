@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/gradient_drawable_menu">
 
     <TextView
         android:id="@+id/tvLogin"
@@ -13,10 +14,12 @@
         android:layout_marginStart="177dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="177dp"
-        android:text="Login"
+        android:fontFamily="serif"
+        android:text="LOGIN"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +33,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
+        android:fontFamily="serif"
         android:hint="Usuario"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -46,6 +50,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
+        android:fontFamily="serif"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -55,15 +60,29 @@
 
     <Button
         android:id="@+id/btnIniciarSesion"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="83dp"
         android:layout_marginEnd="60dp"
+        android:fontFamily="serif"
         android:text="Iniciar sesión"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContrasenaLogin" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="serif"
+        android:text="Registrarse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -71,25 +90,14 @@
         android:layout_height="160dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="117dp"
-        android:text="Registrarse"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"></com.google.android.gms.ads.AdView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

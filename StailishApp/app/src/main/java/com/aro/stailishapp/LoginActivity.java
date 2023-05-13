@@ -33,87 +33,72 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Obtener una instancia de SharedPreferences
-        SharedPreferences prefs = getSharedPreferences(Constants.MY_PREFS_NAME, MODE_PRIVATE);
-        // Obtener el valor almacenado en la sesión y si no hay por defecto asignar el 0
-        int idusuario = prefs.getInt(String.valueOf(Constants.KEY_ID), 0);
-        // Verificar si los datos de inicio de sesión ya están almacenados
-        if (idusuario != 0) {
-            // Si los datos de inicio de sesión están almacenados, el usuario ya inició sesión anteriormente.
-            // En este caso, puedes iniciar la actividad siguiente en lugar de la actividad de inicio de sesión.
-            //Mandar los datos del usuario a la siguiente actividad para uso de base de datos
-            Bundle bundle = new Bundle();
-            bundle.putInt("idusuario", idusuario);
-            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            finish();
-        } else {
-            // Si los datos de inicio de sesión no están almacenados, el usuario aún no ha iniciado sesión.
-            // En este caso, permita que el usuario ingrese sus credenciales en la actividad de inicio de sesión.
-            MobileAds.initialize(this, new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
+        // Si los datos de inicio de sesión no están almacenados, el usuario aún no ha iniciado sesión.
+        // En este caso, permita que el usuario ingrese sus credenciales en la actividad de inicio de sesión.
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
 
-                }
-            });
+            }
+        });
 
-            AdView adView = new AdView(this);
-            adView.setAdSize(AdSize.BANNER);
-            adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-            adView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
-            EditText etUsuario = findViewById(R.id.etUsuarioLogin);
-            EditText etContrasena = findViewById(R.id.etContrasenaLogin);
+        EditText etUsuario = findViewById(R.id.etUsuarioLogin);
+        EditText etContrasena = findViewById(R.id.etContrasenaLogin);
 
-            Button btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
-            Button btnRegister = findViewById(R.id.btnRegister); //Este es el que lleva a la pagina de registro
+        Button btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
+        Button btnRegister = findViewById(R.id.btnRegister); //Este es el que lleva a la pagina de registro
 
-            btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
-                ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
-                @Override
-                public void onClick(View view) {
-                    String usuario = etUsuario.getText().toString();
-                    String contrasena = etContrasena.getText().toString();
-                    Call<Integer> call = apiInterface.login(usuario,contrasena);
-                    call.enqueue(new Callback<Integer>() {
-                        @Override
-                        public void onResponse(Call<Integer> call, Response<Integer> response) {
-                            if (response.body() != -1) {
-                                Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_LONG).show();
-                                //Guardar la variable de sesion de usuario
-                                SharedPreferences.Editor editor = getSharedPreferences(Constants.MY_PREFS_NAME, MODE_PRIVATE).edit();
-                                editor.putInt(String.valueOf(Constants.KEY_ID), response.body());
-                                editor.apply();
-                                //Mandar los datos del usuario a la siguiente actividad para uso de base de datos
-                                Bundle bundle = new Bundle();
-                                bundle.putInt("idusuario", response.body());
-                                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Credenciales no correctas.", Toast.LENGTH_LONG).show();
-                            }
+        btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
+            ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
+
+            @Override
+            public void onClick(View view) {
+                String usuario = etUsuario.getText().toString();
+                String contrasena = etContrasena.getText().toString();
+                Call<Integer> call = apiInterface.login(usuario, contrasena);
+                call.enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        if (response.body() != -1) {
+                            Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_LONG).show();
+                            //Guardar la variable de sesion de usuario
+                            SharedPreferences.Editor editor = getSharedPreferences(Constants.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                            editor.putInt(String.valueOf(Constants.KEY_ID), response.body());
+                            editor.apply();
+                            //Mandar los datos del usuario a la siguiente actividad para uso de base de datos
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("idusuario", response.body());
+                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Credenciales no correctas.", Toast.LENGTH_LONG).show();
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<Integer> call, Throwable t) {
-                            //ha fallado mostrar aviso de que es posible de que no tenga intertet
-                            Log.e("tag", t.getMessage());
-                        }
-                    });
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+                        //ha fallado mostrar aviso de que es posible de que no tenga intertet
+                        Log.e("tag", t.getMessage());
+                    }
+                });
+            }
+        });
 
-            btnRegister.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

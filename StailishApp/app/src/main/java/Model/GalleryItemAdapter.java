@@ -54,6 +54,19 @@ public class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
         ImageView imageView = convertView.findViewById(R.id.ivItemGallery);
         GalleryItem m = getItem(position);
         Picasso.with(getContext()).load(m.getImg_src()).into(imageView);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("imagenUrl", m.getImg_src());
+                Intent intent = new Intent(mContext, PreviewActivity.class);
+                intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 }

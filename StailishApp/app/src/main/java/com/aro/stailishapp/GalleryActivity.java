@@ -3,6 +3,7 @@ package com.aro.stailishapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -31,37 +32,23 @@ public class GalleryActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
 
-        ArrayList<String> arrLinks = new ArrayList<String>(Arrays.asList("https://cdn.kibrispdr.org/data/1/512x512-png-images-26.jpg","https://cdn.kibrispdr.org/data/1/512x512-png-images-26.jpg"));
+        ArrayList<String> arrLinks = new ArrayList<String>();
 
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        arrayList.add(new GalleryItem(arrLinks.get(0)));
-        arrayList.add(new GalleryItem(arrLinks.get(1)));
-        GalleryItemAdapter adapter = new GalleryItemAdapter(getApplicationContext(),R.layout.grid_item,arrayList);
-        gridView.setAdapter(adapter);
-
-        /*Call<ArrayList<String>> call = apiInterface.getLastImgs();
+        Call<ArrayList<String>> call = apiInterface.getUrls();
         call.enqueue(new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-
+                for (int i = 0; i < response.body().size(); i = i + 1) {
+                    arrayList.add(new GalleryItem(response.body().get(i)));
+                    GalleryItemAdapter adapter = new GalleryItemAdapter(getApplicationContext(), R.layout.grid_item, arrayList);
+                    gridView.setAdapter(adapter);
+                }
             }
 
             @Override
             public void onFailure(Call<ArrayList<String>> call, Throwable t) {
-
+                Log.e("tag", t.getMessage());
             }
-        });*/
-
+        });
     }
 }

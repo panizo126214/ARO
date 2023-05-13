@@ -17,19 +17,16 @@ import Model.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
-
-    @GET("getUsuarios.php")
-    Call<List<Usuario>> getUsuario(@Query("codigo") String codigo);
-
-    @GET("registro.php")
-    Call<Integer> registro(@Query("nombre") String nombre, @Query("usuario") String usuario, @Query("email") String email, @Query("contraseña") String contraseña);
-
+    @FormUrlEncoded
+    @POST("registro.php")
+    Call<Integer> registro(@Field("nombre") String nombre, @Field("usuario") String usuario, @Field("email") String email, @Field("contraseña") String contraseña);
     @GET("login.php")
     Call<Integer> login(@Query("usuario") String usuario, @Query("contraseña") String contraseña);
 
@@ -45,8 +42,10 @@ public interface ApiInterface {
     @GET("addImg.php")
     Call<Integer> addImg(@Query("prompt") String prompt, @Query("idusuario") int idusuario, @Query("url") String url);
 
-    @GET("loadImages.php")
-    Call<ArrayList<String>> getLastImgs();
+    @GET("getUrls.php")
+    Call<ArrayList<String>> getUrls();
+
+
     /*@POST("upload")
     Call<Void> uploadImage(@Body ImageRequest imageRequest);
     */

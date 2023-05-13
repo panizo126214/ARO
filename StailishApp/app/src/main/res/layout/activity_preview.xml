@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_drawable_menu"
     tools:context=".PreviewActivity">
 
     <ImageView
@@ -26,25 +27,14 @@
         android:layout_marginStart="178dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="176dp"
-        android:text="Resultado del producto"
+        android:fontFamily="serif"
+        android:text="PREVISUALIZACIÓN"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvPrueba"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="189dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivCamiseta" />
 
     <ImageView
         android:id="@+id/ivPrompt"
@@ -52,9 +42,9 @@
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivCamiseta"
         app:layout_constraintEnd_toEndOf="@+id/ivCamiseta"
-        app:layout_constraintHorizontal_bias="0.651"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="@+id/ivCamiseta"
         app:layout_constraintTop_toTopOf="@+id/ivCamiseta"
-        app:layout_constraintVertical_bias="0.214"
+        app:layout_constraintVertical_bias="0.24"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

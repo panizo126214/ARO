@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_drawable_menu"
     tools:context=".MenuActivity">
 
     <ImageView
@@ -45,36 +46,43 @@
 
     <TextView
         android:id="@+id/tvPrompt"
-        android:layout_width="147dp"
+        android:layout_width="wrap_content"
         android:layout_height="29dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="35dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="serif"
         android:text="Crea un nuevo diseño"
         android:textAlignment="center"
+        android:textColor="#1B1919"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/ivLogout"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="147dp"
+        android:layout_width="wrap_content"
         android:layout_height="29dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="serif"
         android:text="Visita la galería"
         android:textAlignment="center"
+        android:textColor="#1B1919"
         app:layout_constraintBottom_toTopOf="@+id/ivLogout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvPrompt" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="147dp"
+        android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="109dp"
+        android:fontFamily="serif"
         android:text="Cerrar Sesión"
         android:textAlignment="center"
+        android:textColor="#1B1919"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
