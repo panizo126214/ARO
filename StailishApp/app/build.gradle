@@ -14,8 +14,8 @@ android {
         applicationId "com.aro.stailishapp"
         minSdk 28
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

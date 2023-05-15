@@ -50,14 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if (response.body() == 1) {
-                            Toast.makeText(getApplicationContext(), "Te has registrado correctamente!",Toast.LENGTH_LONG).show();
-                            SharedPreferences.Editor editor = getSharedPreferences(Constants.MY_PREFS_NAME, MODE_PRIVATE).edit();
-                            editor.putInt(String.valueOf(Constants.KEY_ID), response.body());
-                            editor.apply();
-                            //Mandar los datos del usuario a la siguiente actividad para uso de base de datos
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("idusuario", response.body());
-                            Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
+                            Toast.makeText(getApplicationContext(), "Te has registrado correctamente! Ahora inicie sesión para verificarlo",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
                         else {
